@@ -1,17 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import { AiOutlineEdit } from "react-icons/ai";
 import { BsFlag, BsFlagFill } from "react-icons/bs";
 import { MdDateRange } from "react-icons/md";
 import { useDeleteTaskMutation, useGetTasksQuery } from "../redux/task/taskApi";
 
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { useSelector } from "react-redux";
 
 export const TaskDetails = () => {
   const { isLoading, isError, data: tasks } = useGetTasksQuery();
 
 
 
-  const [currentId, setCurrentId] = useState("");
+ 
   let content;
 
   const [deleteTask] = useDeleteTaskMutation();
@@ -21,16 +22,10 @@ export const TaskDetails = () => {
     deleteTask(id);
   };
 
-  // handle edit
+  
+  const {status} = useSelector(state => state.filter)
+  console.log(status)
 
-  const handleEdit = (id) => {
-    setCurrentId(id);
-  };
-
-  // handle toggle
-  const handleToggle = () => {
-    setShowModal();
-  };
 
   if (isLoading) {
     content = <div> Loading...</div>;
@@ -75,7 +70,6 @@ export const TaskDetails = () => {
 
         return (
           <div key={id} className=" border rounded-md mt-10 p-4">
-            <div></div>
             <div className=" mt-7">
               <div className=" flex items-center justify-between">
                 <div className=" flex items-center gap-4">
