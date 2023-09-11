@@ -4,7 +4,7 @@ import { BsTrophy } from "react-icons/bs";
 import { IoHomeOutline } from "react-icons/io5";
 import { useDispatch } from "react-redux";
 import logo from "../assets/images/logo.png";
-import { addFilter } from "../redux/filter/filterSlice";
+import { addFilter, removeFilter } from "../redux/filter/filterSlice";
 
 export const Sidebar = () => {
   const [filter, setFilter] = useState("");
@@ -13,6 +13,10 @@ export const Sidebar = () => {
   const handleChange = (value) => {
     setFilter(value);
     dispatch(addFilter(value));
+  };
+
+  const handleClear = () => {
+    dispatch(removeFilter());
   };
 
   return (
@@ -57,6 +61,18 @@ export const Sidebar = () => {
               />
               <label className="block ml-2 text-sm font-medium text-neutral-700 ">
                 Pending
+              </label>
+            </div>
+            <div className="flex items-center mb-4">
+              <input
+                onClick={handleClear}
+                type="radio"
+                name="status"
+                value={filter}
+                className="w-4 h-4 border-gray-300 focus:outline-none"
+              />
+              <label className="block ml-2 text-sm font-medium text-neutral-700 ">
+                Clear
               </label>
             </div>
           </fieldset>

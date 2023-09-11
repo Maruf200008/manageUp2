@@ -11,10 +11,13 @@ const filterSlice = createSlice({
     addFilter: (state, action) => {
         state.status = action.payload;    
       },
+    removeFilter: (state) => {
+        state.status = ""    
+      },
   
   },
 });
 
 
-export const {addFilter} = filterSlice.actions
+export const {addFilter, removeFilter} = filterSlice.actions
 export default filterSlice.reducer;
