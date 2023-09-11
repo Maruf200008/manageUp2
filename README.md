@@ -8,4 +8,8 @@
 
 ## - Implement a way to mark tasks as completed or in progress.
 
+## - End Deadliner Feature
+
+#### Add filtering by status
+
 I could not complete the rest of the work due to my time constraints. Sincerely sorry for that.
