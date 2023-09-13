@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import { BsFlag, BsFlagFill } from "react-icons/bs";
 
+import { AiOutlineEdit } from "react-icons/ai";
 import { GrClear } from "react-icons/gr";
 import { MdDateRange } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
@@ -90,6 +91,7 @@ export const EditModal = ({ id }) => {
 
   const handleAssignTask = (value) => {
     setAssaginTask(value);
+    setShowUserNameModal(true);
   };
 
   const {
@@ -103,6 +105,8 @@ export const EditModal = ({ id }) => {
   const handleAssignUser = (value) => {
     setAssaginUser(value);
     setShowUserNameModal(false);
+    setShowInput(false);
+    setAssaginTask(value?.name);
   };
 
   // show user
@@ -135,13 +139,16 @@ export const EditModal = ({ id }) => {
     dispatch(hideToggle());
   };
 
+  console.log(singleTask);
   useEffect(() => {
     if (singleTask) {
       console.log(singleTask);
+
       const { assainFor, date, description, priority, progress, title } =
         singleTask || {};
       setTaskTitle(title);
       setAssaginTask(assainFor?.name);
+      setAssaginUser(assainFor);
       setDesc(description);
       setPriority(priority);
       setDate(date);
@@ -154,22 +161,20 @@ export const EditModal = ({ id }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(assaginTask);
-    // EditTask({id, data : {
-    //     title: taskTitle,
-    //     assainFor: assaginUser,
-    //     description: desc,
-    //     priority: priority,
-    //     date,
-    //     progress,
-    //   }});
+    console.log(assaginUser);
+    EditTask({
+      id,
+      data: {
+        id,
+        title: taskTitle,
+        assainFor: assaginUser,
+        description: desc,
+        priority: priority,
+        date,
+        progress,
+      },
+    });
 
-    setTaskTitle("");
-    setAssaginUser("");
-    setAssaginTask("");
-    setDesc("");
-    setPriority("");
-    setDate("");
-    setProgress("");
     dispatch(hideToggle());
   };
 
@@ -224,9 +229,29 @@ export const EditModal = ({ id }) => {
                           />
                         ) : (
                           <div className=" flex items-center gap-3 w-[500px]">
-                            <p className=" bg-neutral-100 p-1 rounded-md  ">
-                              {assaginUser?.name}
-                            </p>
+                            {!showInput ? (
+                              <div className=" flex items-center gap-2">
+                                <p className=" bg-neutral-100 p-1 rounded-md  ">
+                                  {assaginUser?.name}
+                                </p>
+                                <div
+                                  onClick={() => setShowInput(!showInput)}
+                                  className=" cursor-pointer bg-orange-200 p-2 rounded-md text-orange-700"
+                                >
+                                  <AiOutlineEdit />
+                                </div>
+                              </div>
+                            ) : (
+                              <input
+                                placeholder="Search user"
+                                onChange={(e) =>
+                                  handleAssignTask(e.target.value)
+                                }
+                                value={assaginTask}
+                                type="text"
+                                className=" px-2 py-1 rounded-md border focus:outline-none w-[400px]"
+                              />
+                            )}
                           </div>
                         )}
 
@@ -389,7 +414,7 @@ export const EditModal = ({ id }) => {
                         type="submit"
                         className=" bg-violet-500 px-3 py-2 rounded-md text-white hover:bg-violet-700 transition"
                       >
-                        + Create Task
+                        Update Task
                       </button>
                     </div>
                   </div>

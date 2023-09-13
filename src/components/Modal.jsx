@@ -200,7 +200,7 @@ export const Modal = () => {
                     <div>
                       {!assaginUser ? (
                         <input
-                          placeholder="Search user by email address"
+                          placeholder="Search user "
                           onChange={(e) => handleAssignTask(e.target.value)}
                           value={assaginTask}
                           type="text"

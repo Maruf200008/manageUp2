@@ -15,6 +15,8 @@ export const TaskDetails = () => {
 
 
 
+
+
  
   let content;
 
@@ -29,6 +31,7 @@ export const TaskDetails = () => {
   // handle edit
   const dispatch = useDispatch()
   const handleEdit = (id) => {
+    console.log(id)
     setCurrentId(id)
     dispatch(showToggle())
 
