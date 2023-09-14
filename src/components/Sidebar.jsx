@@ -5,6 +5,7 @@ import { IoHomeOutline } from "react-icons/io5";
 import { useDispatch } from "react-redux";
 import logo from "../assets/images/logo.png";
 import { addFilter, removeFilter } from "../redux/filter/filterSlice";
+import { showHome, showProfile } from "../redux/user/userSlice";
 
 export const Sidebar = () => {
   const [filter, setFilter] = useState("");
@@ -16,8 +17,20 @@ export const Sidebar = () => {
   };
 
   const handleClear = () => {
+ 
     dispatch(removeFilter());
   };
+
+  const handleShownHome = () => {
+    console.log("Home")
+    dispatch(showHome())
+    
+  }
+  const handleShownProfile = () => {
+    console.log("Profile")
+    dispatch(showProfile())
+   
+  }
 
   return (
     <div className=" ">
@@ -77,11 +90,11 @@ export const Sidebar = () => {
             </div>
           </fieldset>
         </div>
-        <div className=" flex items-center gap-3 hover:bg-gray-100 cursor-pointer py-2 px-3 transition rounded-md mr-3 text-gray-600">
+        <div onClick={handleShownHome} className=" flex items-center gap-3 hover:bg-gray-100 cursor-pointer py-2 px-3 transition rounded-md mr-3 text-gray-600">
           <IoHomeOutline />
           <p>Home</p>
         </div>
-        <div className=" flex items-center gap-3 hover:bg-gray-100 cursor-pointer py-2 px-3 transition rounded-md mr-3 text-gray-600">
+        <div onClick={handleShownProfile} className=" flex items-center gap-3 hover:bg-gray-100 cursor-pointer py-2 px-3 transition rounded-md mr-3 text-gray-600">
           <AiOutlineUser />
           <p>Profile</p>
         </div>

@@ -1,7 +1,8 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import profile from "../assets/images/man.jpg";
 import { Modal } from "../components/Modal";
+import { Profile } from "../components/Profile";
 import { Sidebar } from "../components/Sidebar";
 import { TaskDetails } from "../components/TaskDetails";
 import { userLogOut } from "../redux/auth/authSlice";
@@ -11,6 +12,9 @@ export const Home = () => {
   const handleClike = () => {
     dispatch(userLogOut());
   };
+
+  const {displayShown} = useSelector(state => state.user)
+  
   return (
     <div className="max-w-screen-2xl   mx-auto p-4 relative ">
       <div className=" flex items-center justify-end">
@@ -29,12 +33,12 @@ export const Home = () => {
           <Sidebar />
         </div>
         <div className=" col-span-7 ">
-          <TaskDetails />
+          {displayShown === "Home" ? <TaskDetails /> : <Profile/> }
         </div>
       </div>
       <div className="   ">
         <div className=" flex items-center justify-end  ">
-          <Modal />
+        {displayShown === "Home" ? <Modal/> : "" }
         </div>
       </div>
     </div>

@@ -42,7 +42,7 @@ export const Login = () => {
           <div className=" flex items-center gap-5">
             <p className=" text-sm"> Don't have an account? </p>
             <Link to="/signup">
-              <button className=" bg-violet-500 hover:bg-violet-700 transition shadow-xl shadow-violet-300 px-5 py-2 rounded-md font-semibold text-white">
+              <button className=" bg-violet-500 hover:bg-violet-700 transition shadow-xl shadow-violet-300  px-5 py-2 rounded-md font-semibold text-white">
                 Sign Up
               </button>
             </Link>
@@ -95,7 +95,7 @@ export const Login = () => {
                     type="submit"
                     className=" bg-violet-500 w-[270px] hover:bg-violet-700 transition shadow-xl shadow-violet-500/25 rounded-md py-2 text-lg font-bold text-white"
                   >
-                    Log In
+                    {isLoading ? "Loading..." : "Log In"}
                   </button>
                 </div>
                 <p className=" text-center text-sm mt-5">

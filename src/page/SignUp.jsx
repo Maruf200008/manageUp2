@@ -150,7 +150,8 @@ export const SignUp = () => {
                     type="submit"
                     className=" bg-violet-500 w-[270px] hover:bg-violet-700 transition shadow-xl shadow-violet-500/25 rounded-md py-2  font-bold text-white"
                   >
-                    Play With ManageUp
+                    {isLoading ? "Loading..." : "Play With ManageUp"}
+            
                   </button>
                 </div>
                 <p className=" text-center text-sm mt-5">
